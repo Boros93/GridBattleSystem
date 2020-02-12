@@ -22,6 +22,7 @@ public class MapManager : MonoBehaviour
     {
         TILE_GRASS = 0,
         TILE_WATER = 1,
+        TILE_TREE = 2,
     }
 
     private void Start()
@@ -34,6 +35,7 @@ public class MapManager : MonoBehaviour
     private void GenerateMapInfo()
     {
         tiles = new int[mapSizeX, mapSizeY];
+        // Crea una mappa con tutti tiles di tipo grass
         for (int x = 0; x < mapSizeX; x++)
         {
             for (int y = 0; y < mapSizeY; y++)
@@ -41,8 +43,9 @@ public class MapManager : MonoBehaviour
                 tiles[x, y] = (int)TileType.TILE_GRASS;
             }
         }
-
+        // Mette il primo tile come water, necessità creazione layout
         tiles[0,0] = (int)TileType.TILE_WATER;
+        tiles[2, 3] = (int)TileType.TILE_TREE;
     }
 
     private void GenerateMapGraphics()
@@ -57,7 +60,6 @@ public class MapManager : MonoBehaviour
                 GameObject newTile = Instantiate(prefabTiles[index].tilePrefab, new Vector3(x, 0, y), Quaternion.identity);
                 newTile.transform.SetParent(tileContainer.transform);
                 tilesOnMap[x, y] = newTile;
-
             }
         }
     }

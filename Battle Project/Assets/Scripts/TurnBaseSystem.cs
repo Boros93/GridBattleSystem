@@ -9,11 +9,10 @@ public class TurnBaseSystem : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
-    public Transform playerBattleStation;
-    public Transform enemyBattleStation;
-
     Unit playerUnit;
     Unit enemyUnit;
+
+    public BattleSetup btSetup;
 
     public BattleState state;
 
@@ -25,10 +24,10 @@ public class TurnBaseSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
-        GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
+        GameObject playerGO = Instantiate(playerPrefab, btSetup.playerStartPosition, Quaternion.identity);
         playerUnit = playerGO.GetComponent<Unit>();
 
-        GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
+        GameObject enemyGO = Instantiate(enemyPrefab, btSetup.enemiesStartPosition[0], Quaternion.identity);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         Debug.Log("Battaglia iniziata!");
